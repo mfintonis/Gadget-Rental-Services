@@ -14,7 +14,15 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
         private readonly string ImageFilePath = $"{HttpContext.Current.Request.PhysicalApplicationPath}\\App_Data\\ItemImages";
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Context.User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("~/account/login");
+            }
 
+            if (!Context.User.IsInRole("Administrator"))
+            {
+                Response.Redirect("~/Error?code=403");
+            }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
