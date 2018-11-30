@@ -12,6 +12,6 @@ namespace App_Code.Classes
         public string ItemSku { get; set; }
         public int ItemQuantityAvailable { get; set; }
         public string ItemImagePath { get; set; }
-        public decimal ItemPrice { get; set; }
+        public double ItemPrice { get; set; }
     }
 }

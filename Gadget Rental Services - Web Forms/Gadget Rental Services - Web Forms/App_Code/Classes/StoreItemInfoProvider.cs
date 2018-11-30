@@ -19,12 +19,15 @@ namespace App_Code.Classes
                 return false;
             }
 
-            string commandString = "INSERT INTO StoreItem (ItemName, ItemSku, ItemQuantityAvailable, ItemImagePath, ItemPrice) OUTPUT INSERTED.ID VALUES (@ItemName, @ItemSku, @ItemQuantityAvailable, @ItemImagePath, @ItemPrice)";
+            //string commandString = "INSERT INTO StoreItem (ItemName, ItemSku, ItemQuantityAvailable, ItemImagePath, ItemPrice) OUTPUT INSERTED.ID VALUES (@ItemName, @ItemSku, @ItemQuantityAvailable, @ItemImagePath, @ItemPrice)";
+            string storedProcedure = "Proc_Insert_Store_Item";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand(commandString, conn))
+                using (SqlCommand cmd = new SqlCommand(storedProcedure, conn))
                 {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
                     cmd.Parameters.AddWithValue("@ItemName", info.ItemName);
                     cmd.Parameters.AddWithValue("@ItemSku", info.ItemSku);
                     cmd.Parameters.AddWithValue("@ItemQuantityAvailable", info.ItemQuantityAvailable);
@@ -73,7 +76,7 @@ namespace App_Code.Classes
                                     info.ItemSku = dr["ItemSku"].ToString();
                                     info.ItemQuantityAvailable = Convert.ToInt32(dr["ItemQuantityAvailable"]);
                                     info.ItemImagePath = dr["ItemImagePath"].ToString();
-                                    info.ItemPrice = Convert.ToDecimal(dr["ItemPrice"]);
+                                    info.ItemPrice = Convert.ToDouble(dr["ItemPrice"]);
                                 }
                             }
                         }
@@ -116,7 +119,7 @@ namespace App_Code.Classes
                                     info.ItemSku = dr["ItemSku"].ToString();
                                     info.ItemQuantityAvailable = Convert.ToInt32(dr["ItemQuantityAvailable"]);
                                     info.ItemImagePath = dr["ItemImagePath"].ToString();
-                                    info.ItemPrice = Convert.ToDecimal(dr["ItemPrice"]);
+                                    info.ItemPrice = Convert.ToDouble(dr["ItemPrice"]);
                                     infos.Add(info);
                                 }
                             }

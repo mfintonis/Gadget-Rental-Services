@@ -11,7 +11,8 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
 {
     public partial class Add : System.Web.UI.Page
     {
-        private readonly string ImageFilePath = $"{HttpContext.Current.Request.PhysicalApplicationPath}\\App_Data\\ItemImages";
+        private readonly string ServerFilePath = $"{HttpContext.Current.Request.PhysicalApplicationPath}\\ItemImages";
+        private readonly string ImageFilePath = $"/ItemImages";
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Context.User.Identity.IsAuthenticated)
@@ -27,7 +28,8 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            string imageFilePath = $"{ImageFilePath}\\{txtItemSku.Text}-{upldImageSelector.FileName}";
+            string imageFilePath = $"{ImageFilePath}/{txtItemSku.Text}-{upldImageSelector.FileName}";
+            string serverFilePath = $"{ServerFilePath}\\{txtItemSku.Text}-{upldImageSelector.FileName}";
             int itemID = 0;
             try
             {                
@@ -36,7 +38,7 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
                 StoreItemInfo itemInfo = new StoreItemInfo();
 
                 int itemQuantity;
-                decimal itemPrice;
+                double itemPrice;
 
                 if(!Int32.TryParse(txtItemQuantityAvailable.Text, out itemQuantity))
                 {
@@ -44,7 +46,7 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
                     return;
                 }
 
-                if(!decimal.TryParse(txtItemPrice.Text, out itemPrice))
+                if(!double.TryParse(txtItemPrice.Text, out itemPrice))
                 {
                     lblGeneralError.Text = "Unable to parse value for 'Item Quantity Avaialable' field. Please double check the value entered.";
                     return;
@@ -56,7 +58,7 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
                 itemInfo.ItemImagePath = imageFilePath;
                 itemInfo.ItemPrice = itemPrice;
 
-                upldImageSelector.SaveAs(imageFilePath);
+                upldImageSelector.SaveAs(serverFilePath);
 
                 if(!StoreItemInfoProvider.AddStoreItem(itemInfo, out providerErrorMessage, out itemID))
                 {
