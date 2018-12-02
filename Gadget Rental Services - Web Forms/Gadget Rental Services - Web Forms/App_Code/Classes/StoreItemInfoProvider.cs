@@ -18,8 +18,7 @@ namespace App_Code.Classes
                 exceptionMessage = "StoreItemInfo object was null.";
                 return false;
             }
-
-            //string commandString = "INSERT INTO StoreItem (ItemName, ItemSku, ItemQuantityAvailable, ItemImagePath, ItemPrice) OUTPUT INSERTED.ID VALUES (@ItemName, @ItemSku, @ItemQuantityAvailable, @ItemImagePath, @ItemPrice)";
+            
             string storedProcedure = "Proc_Insert_Store_Item";
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -54,13 +53,15 @@ namespace App_Code.Classes
 
         public static StoreItemInfo GetItem(int id, out string exceptionMessage)
         {
-            string commandString = $"SELECT * FROM StoreItem WHERE Id = {id}";
-            StoreItemInfo info = null;
+            string storedProcedure = $"Proc_Get_Store_Item";
+            var info = new StoreItemInfo();
 
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                using (SqlCommand cmd = new SqlCommand(commandString, conn))
-                {                    
+                using (SqlCommand cmd = new SqlCommand(storedProcedure, conn))
+                {
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Id", id);
                     try
                     {
                         conn.Open();
@@ -69,8 +70,7 @@ namespace App_Code.Classes
                             if (dr != null)
                             {
                                 while (dr.Read())
-                                {
-                                    info = new StoreItemInfo();
+                                {                                    
                                     info.Id = Convert.ToInt32(dr["Id"]);
                                     info.ItemName = dr["ItemName"].ToString();
                                     info.ItemSku = dr["ItemSku"].ToString();
@@ -92,6 +92,48 @@ namespace App_Code.Classes
             }
             exceptionMessage = null;
             return info;
+        }
+
+        public static bool UpdateItem(StoreItemInfo info, out string exceptionMessage)
+        {
+            string storedProcedure = $"Proc_Update_Store_Item";
+
+            if (info != null)
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand(storedProcedure, conn))
+                    {
+                        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                        cmd.Parameters.AddWithValue("@Id", info.Id);
+                        cmd.Parameters.AddWithValue("@ItemName", info.ItemName);
+                        cmd.Parameters.AddWithValue("@ItemSku", info.ItemSku);
+                        cmd.Parameters.AddWithValue("@ItemQuantityAvailable", info.ItemQuantityAvailable);
+                        cmd.Parameters.AddWithValue("@ItemImagePath", info.ItemImagePath);
+                        cmd.Parameters.AddWithValue("@ItemPrice", info.ItemPrice);
+
+                        try
+                        {
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (Exception e)
+                        {
+                            conn.Close();
+                            exceptionMessage = e.Message;
+                            return false;
+                        }
+                        conn.Close();
+                    }
+                }
+            }
+            else
+            {
+                throw new NullReferenceException("StoreItemInfo 'info' was null");
+            }
+            exceptionMessage = null;
+            return true;
         }
 
         public static List<StoreItemInfo> GetItems(out string exceptionMessage)

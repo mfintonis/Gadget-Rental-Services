@@ -94,6 +94,24 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems {
         protected global::System.Web.UI.WebControls.TextBox txtItemPrice;
         
         /// <summary>
+        /// lblImage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblImage;
+        
+        /// <summary>
+        /// upldImageSelector control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload upldImageSelector;
+        
+        /// <summary>
         /// btnSubmit control.
         /// </summary>
         /// <remarks>

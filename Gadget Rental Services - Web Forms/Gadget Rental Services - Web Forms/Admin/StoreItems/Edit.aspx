@@ -41,18 +41,17 @@
             </div>
         </div>
 
-        <%--<div class="form-group">
+        <div class="form-group">
             <asp:Label runat="server" ID="lblImage" AssociatedControlID="upldImageSelector" CssClass="col-md-2 control-label">Item Image</asp:Label>
             <div class="col-md-10">
-                <asp:FileUpload runat="server" ID="upldImageSelector" AllowMultiple="false" />
-                <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="upldImageSelector" CssClass="text-danger" ErrorMessage="Item Image is required." />
+                <asp:FileUpload runat="server" ID="upldImageSelector" AllowMultiple="false" />                
                 <asp:RegularExpressionValidator runat="server" Display="Dynamic" ControlToValidate="upldImageSelector" CssClass="text-danger" ValidationExpression="(.*\.([Jj][Pp][Gg])|.*\.([Bb][Mm][Pp])|.*\.([pP][nN][gG])|.*\.([Jj][Pp][Ee][Gg])$)" ErrorMessage="Only .png, .jpg, .jpeg, and .bmp file types are allowed." />
             </div>
-        </div>--%>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <asp:Button runat="server" ID="btnSubmit" Text="Add Item" OnClick="btnSubmit_Click" CssClass="btn btn-default" />
+                <asp:Button runat="server" ID="btnSubmit" Text="Update Item" OnClick="btnSubmit_Click" CssClass="btn btn-default" />
             </div>
         </div>
 

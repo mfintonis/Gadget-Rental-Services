@@ -14,7 +14,7 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
         {
             if (!Context.User.Identity.IsAuthenticated)
             {
-                Response.Redirect("~/account/login");
+                Response.Redirect("~/account/login?returnurl=/admin/storeitems");
             }
 
             if (!Context.User.IsInRole("Administrator"))

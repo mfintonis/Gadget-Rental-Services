@@ -16,15 +16,15 @@
             <ItemTemplate>
                 <tr>
                     <td style="max-width: 35px;">
-                        <a>Edit</a> |
-                        <a>Delete</a>
+                        <a href="/admin/storeitems/edit?id=<%# Eval("Id") %>">Edit</a> |
+                        <a href="/admin/storeitems/delete?id=<%# Eval("Id") %>">Delete</a>
                     </td>
                     <td><%# Eval("ItemName") %></td>
                     <td><%# Eval("ItemSku") %></td>
                     <td><%# Eval("ItemQuantityAvailable") %></td>
                     <td>$<%# Eval("ItemPrice") %></td>
                     <td>
-                        <img src="<%# Eval("ItemImagePath") %>" style="max-width: 100px; max-height: 100px;" />
+                        <img src="<%# Eval("ItemImagePath") %>" style="max-width: 100px; max-height: 100px; padding-top: 10px" />
                     </td>
                 </tr>
             </ItemTemplate>

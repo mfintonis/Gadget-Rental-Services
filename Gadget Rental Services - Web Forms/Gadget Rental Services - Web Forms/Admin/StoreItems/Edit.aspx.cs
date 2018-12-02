@@ -12,12 +12,13 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
     public partial class Edit : System.Web.UI.Page
     {
         private readonly string ServerFilePath = $"{HttpContext.Current.Request.PhysicalApplicationPath}\\ItemImages";
-        private readonly string ImageFilePath = $"/ItemImages";
+        private readonly string ImageFilePath = $"/ItemImages";     
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Context.User.Identity.IsAuthenticated)
             {
-                Response.Redirect("~/account/login");
+                Response.Redirect("~/account/login?returnurl=/admin/storeitems/");
             }
 
             if (!Context.User.IsInRole("Administrator"))
@@ -32,29 +33,61 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
                 Response.Redirect("~/admin/StoreItems");
             }
 
-            string exceptionMessage = "";
-
-            var storeItem = StoreItemInfoProvider.GetItem(id, out exceptionMessage);
-
-            if (storeItem != null && !String.IsNullOrEmpty(exceptionMessage))
+            if (!IsPostBack)
             {
-                txtItemName.Text = storeItem.ItemName;
-                txtItemPrice.Text = storeItem.ItemPrice.ToString();
-                txtItemQuantityAvailable.Text = storeItem.ItemQuantityAvailable.ToString();
-                txtItemSku.Text = storeItem.ItemSku;
+                string exceptionMessage = "";
+
+                var storeItem = StoreItemInfoProvider.GetItem(id, out exceptionMessage);
+
+                if (storeItem != null && String.IsNullOrEmpty(exceptionMessage))
+                {
+                    txtItemName.Text = storeItem.ItemName;
+                    txtItemPrice.Text = storeItem.ItemPrice.ToString();
+                    txtItemQuantityAvailable.Text = storeItem.ItemQuantityAvailable.ToString();
+                    txtItemSku.Text = storeItem.ItemSku;
+                }
             }
         }
 
         protected void btnSubmit_Click(object sender, EventArgs e)
-        {
-            /*string imageFilePath = $"{ImageFilePath}/{txtItemSku.Text}-{upldImageSelector.FileName}";
+        {            
+            string imageFilePath = $"{ImageFilePath}/{txtItemSku.Text}-{upldImageSelector.FileName}";
             string serverFilePath = $"{ServerFilePath}\\{txtItemSku.Text}-{upldImageSelector.FileName}";
-            int itemID = 0;
+
+            int id = 0;
+            string exceptionMessage;
+
             try
             {
-                string providerErrorMessage = "";
 
-                StoreItemInfo itemInfo = new StoreItemInfo();
+                if (!Int32.TryParse(Request["id"], out id))
+                {
+                    lblGeneralError.Text = "Could not retrieve ID for item. Saving failed.";
+                    return;
+                }
+
+                var storeItem = StoreItemInfoProvider.GetItem(id, out exceptionMessage);
+
+                if (storeItem == null)
+                {
+                    lblGeneralError.Text = "Could not save data. The result seems to have been deleted before you saved your changes. Please recreate this item";
+                    return;
+                }
+
+                if (upldImageSelector.HasFile)
+                {
+                    string originalFilePath = $"{ServerFilePath}\\{storeItem.ItemImagePath.Split('/').Last()}";
+
+                    if (File.Exists(originalFilePath))
+                    {
+                        File.Delete(originalFilePath);
+                    }
+
+                    upldImageSelector.SaveAs(serverFilePath);
+
+                    storeItem.ItemImagePath = imageFilePath;
+                }
+                string providerErrorMessage = "";
 
                 int itemQuantity;
                 double itemPrice;
@@ -71,20 +104,19 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
                     return;
                 }
 
-                itemInfo.ItemName = txtItemName.Text;
-                itemInfo.ItemSku = txtItemSku.Text;
-                itemInfo.ItemQuantityAvailable = itemQuantity;
-                itemInfo.ItemImagePath = imageFilePath;
-                itemInfo.ItemPrice = itemPrice;
+                storeItem.ItemName = txtItemName.Text;
+                storeItem.ItemSku = txtItemSku.Text;
+                storeItem.ItemQuantityAvailable = itemQuantity;
 
-                upldImageSelector.SaveAs(serverFilePath);
+                storeItem.ItemPrice = itemPrice;
 
-                if (!StoreItemInfoProvider.AddStoreItem(itemInfo, out providerErrorMessage, out itemID))
+                if (!StoreItemInfoProvider.UpdateItem(storeItem, out exceptionMessage))
                 {
-                    throw new Exception($"An exception occurred while saving the store item. Original Message: '{providerErrorMessage}'");
+                    lblGeneralError.Text = $"An exception occurred while saving the store item. Original Message: '{exceptionMessage}'";
+                    return;
                 }
 
-                Response.Redirect($"~/Admin/StoreItems/Edit?id={itemID}");
+                Response.Redirect($"~/Admin/StoreItems/");
             }
             catch (Exception ex)
             {
@@ -94,7 +126,7 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
                 {
                     File.Delete(imageFilePath);
                 }
-            }*/
+            }
         }
     }
 }

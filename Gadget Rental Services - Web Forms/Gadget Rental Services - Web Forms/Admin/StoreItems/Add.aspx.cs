@@ -17,7 +17,7 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
         {
             if (!Context.User.Identity.IsAuthenticated)
             {
-                Response.Redirect("~/account/login");
+                Response.Redirect("~/account/login?returnurl=/admin/storeitems/add");
             }
 
             if (!Context.User.IsInRole("Administrator"))
@@ -65,7 +65,7 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
                     throw new Exception($"An exception occurred while saving the store item. Original Message: '{providerErrorMessage}'");
                 }
 
-                Response.Redirect($"~/Admin/StoreItems/Edit?id={itemID}");
+                Response.Redirect($"~/Admin/StoreItems/");
             }
             catch (Exception ex)
             {
