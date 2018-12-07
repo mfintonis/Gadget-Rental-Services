@@ -5,5 +5,6 @@
     <br />
     <ul>
         <li><a href="/Admin/StoreItems/">Manage Store Items</a></li>
+        <li><a href="/Admin/UserManagement/">User Management</a></li>
     </ul>
 </asp:Content>

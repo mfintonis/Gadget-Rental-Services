@@ -172,6 +172,7 @@
     <Content Include="Admin\StoreItems\Add.aspx" />
     <Content Include="Admin\StoreItems\Default.aspx" />
     <Content Include="Admin\StoreItems\Edit.aspx" />
+    <Content Include="Admin\UserManagement\Default.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -348,6 +349,13 @@
     <Compile Include="Admin\StoreItems\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\UserManagement\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserManagement\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Code\Classes\StoreItemInfo.cs" />
     <Compile Include="App_Code\Classes\StoreItemInfoProvider.cs" />
     <Compile Include="Admin\StoreItems\Add.aspx.cs">
@@ -357,6 +365,8 @@
     <Compile Include="Admin\StoreItems\Add.aspx.designer.cs">
       <DependentUpon>Add.aspx</DependentUpon>
     </Compile>
+    <Content Include="App_Code\Classes\UserInfo.cs" />
+    <Content Include="App_Code\Classes\UserInfoProvider.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
