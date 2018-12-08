@@ -12,7 +12,7 @@
         </tr>
         <asp:Repeater runat="server" ID="rptUsers">
             <ItemTemplate>
-                <tr>
+                <tr style="height: 35px;">
                     <td style="max-width: 35px;">
                         <a href="/admin/usermanagement/edit?id=<%# Eval("UserID") %>">Edit</a> |
                         <a href="/admin/usermanagement/delete?id=<%# Eval("UserID") %>">Delete</a>
