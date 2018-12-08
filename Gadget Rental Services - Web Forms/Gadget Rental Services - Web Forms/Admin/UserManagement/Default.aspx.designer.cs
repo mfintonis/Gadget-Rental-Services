@@ -13,13 +13,22 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.UserManagement {
     public partial class Default {
         
         /// <summary>
-        /// rptStoreItems control.
+        /// ltrlError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater rptStoreItems;
+        protected global::System.Web.UI.WebControls.Literal ltrlError;
+        
+        /// <summary>
+        /// rptUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptUsers;
         
         /// <summary>
         /// btnNew control.

@@ -14,26 +14,32 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.UserManagement
         {
             if (!Context.User.Identity.IsAuthenticated)
             {
-                Response.Redirect("~/account/login?returnurl=/admin/storeitems");
+                Response.Redirect("~/account/login?returnurl=/admin/usermanagement");
             }
 
             if (!Context.User.IsInRole("Administrator"))
             {
                 Response.Redirect("~/Error?code=403");
             }
+            int errorCode = 0;
+
+            if (Int32.TryParse(Request["error"], out errorCode) && errorCode == 1)
+            {
+                ltrlError.Text = "<p style=\"color: red;\">You cannot delete your own user. If this is needed, another administrator must login and delete your account.</p>";
+            }
 
             string errorMessage = "";
-            var items = StoreItemInfoProvider.GetItems(out errorMessage);
+            var users = UserInfoProvider.GetAllUsers(out errorMessage);
             if (String.IsNullOrEmpty(errorMessage))
             {
-                rptStoreItems.DataSource = items;
-                rptStoreItems.DataBind();
+                rptUsers.DataSource = users;
+                rptUsers.DataBind();
             }
         }
 
         protected void btnNew_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Admin/StoreItems/Add");
+            Response.Redirect("~/Admin/UserManagement/Add");
         }
     }
 }

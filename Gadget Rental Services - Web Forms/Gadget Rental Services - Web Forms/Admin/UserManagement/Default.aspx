@@ -2,35 +2,28 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="MainContent">
     <br />
+    <asp:Literal ID="ltrlError" runat="server"></asp:Literal>
     <br />
     <table style="width: 100%;">
         <tr>
             <th></th>
-            <th><strong>Name</strong></th>
-            <th><strong>SKU</strong></th>
-            <th><strong>Quantity Available</strong></th>
-            <th><strong>Price</strong></th>
-            <th><strong>Image</strong></th>
+            <th><strong>Email</strong></th>
+            <th><strong>Role</strong></th>
         </tr>
-        <asp:Repeater runat="server" ID="rptStoreItems">
+        <asp:Repeater runat="server" ID="rptUsers">
             <ItemTemplate>
                 <tr>
                     <td style="max-width: 35px;">
-                        <a href="/admin/storeitems/edit?id=<%# Eval("Id") %>">Edit</a> |
-                        <a href="/admin/storeitems/delete?id=<%# Eval("Id") %>">Delete</a>
+                        <a href="/admin/usermanagement/edit?id=<%# Eval("UserID") %>">Edit</a> |
+                        <a href="/admin/usermanagement/delete?id=<%# Eval("UserID") %>">Delete</a>
                     </td>
-                    <td><%# Eval("ItemName") %></td>
-                    <td><%# Eval("ItemSku") %></td>
-                    <td><%# Eval("ItemQuantityAvailable") %></td>
-                    <td>$<%# Eval("ItemPrice") %></td>
-                    <td>
-                        <img src="<%# Eval("ItemImagePath") %>" style="max-width: 100px; max-height: 100px; padding-top: 10px" />
-                    </td>
+                    <td><%# Eval("Email") %></td>
+                    <td><%# Eval("RoleName") %></td>
                 </tr>
             </ItemTemplate>
         </asp:Repeater>
     </table>
     <br />
     <br />
-    <asp:Button runat="server" ID="btnNew" OnClick="btnNew_Click" Text="Add Item" CssClass="btn btn-default" />
+    <asp:Button runat="server" ID="btnNew" OnClick="btnNew_Click" Text="Add User" CssClass="btn btn-default" />
 </asp:Content>

@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -171,9 +172,12 @@
     <Content Include="Admin\Default.aspx" />
     <Content Include="Admin\StoreItems\Add.aspx" />
     <Content Include="Admin\StoreItems\Default.aspx" />
+    <Content Include="Admin\StoreItems\Delete.aspx" />
     <Content Include="Admin\StoreItems\Edit.aspx" />
+    <Content Include="Admin\UserManagement\Add.aspx" />
     <Content Include="Admin\UserManagement\Default.aspx" />
-    <Content Include="Contact.aspx" />
+    <Content Include="Admin\UserManagement\Delete.aspx" />
+    <Content Include="Admin\UserManagement\Edit.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -342,6 +346,13 @@
     <Compile Include="Admin\StoreItems\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\StoreItems\Delete.aspx.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\StoreItems\Delete.aspx.designer.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\StoreItems\Edit.aspx.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -349,12 +360,33 @@
     <Compile Include="Admin\StoreItems\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\UserManagement\Add.aspx.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserManagement\Add.aspx.designer.cs">
+      <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\UserManagement\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\UserManagement\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserManagement\Delete.aspx.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserManagement\Delete.aspx.designer.cs">
+      <DependentUpon>Delete.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UserManagement\Edit.aspx.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UserManagement\Edit.aspx.designer.cs">
+      <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Code\Classes\StoreItemInfo.cs" />
     <Compile Include="App_Code\Classes\StoreItemInfoProvider.cs" />
@@ -365,8 +397,8 @@
     <Compile Include="Admin\StoreItems\Add.aspx.designer.cs">
       <DependentUpon>Add.aspx</DependentUpon>
     </Compile>
-    <Content Include="App_Code\Classes\UserInfo.cs" />
-    <Content Include="App_Code\Classes\UserInfoProvider.cs" />
+    <Compile Include="App_Code\Classes\UserInfo.cs" />
+    <Compile Include="App_Code\Classes\UserInfoProvider.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
@@ -378,13 +410,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Contact.aspx.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Contact.aspx.designer.cs">
-      <DependentUpon>Contact.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

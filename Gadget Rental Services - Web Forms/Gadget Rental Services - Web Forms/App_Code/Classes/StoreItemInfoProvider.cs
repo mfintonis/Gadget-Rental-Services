@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -9,6 +10,7 @@ namespace App_Code.Classes
     public static class StoreItemInfoProvider
     {
         private static readonly string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private static readonly string ServerFilePath = $"{HttpContext.Current.Request.PhysicalApplicationPath}\\ItemImages";
 
         public static bool AddStoreItem(StoreItemInfo info, out string exceptionMessage, out int itemID)
         {
@@ -178,6 +180,31 @@ namespace App_Code.Classes
             }
             exceptionMessage = null;
             return infos;
+        }
+
+        public static void DeleteItem(int id)
+        {
+            string commandString = $"DELETE FROM StoreItem WHERE Id = {id}";
+
+            string message;
+            var item = GetItem(id, out message);
+
+            string serverFilePath = $"{ServerFilePath}\\{item.ItemImagePath.Split('/').Last()}";
+
+            if (File.Exists(serverFilePath))
+            {
+                File.Delete(serverFilePath);
+            }
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(commandString, conn))
+                {
+                    conn.Open();
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
     }
 }
