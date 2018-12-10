@@ -15,7 +15,7 @@
         <asp:Repeater runat="server" ID="rptStoreItems">
             <ItemTemplate>
                 <tr>
-                    <td style="max-width: 35px;">
+                    <td style=" min-width: 35px;">
                         <a href="/admin/storeitems/edit?id=<%# Eval("Id") %>">Edit</a> |
                         <a href="/admin/storeitems/delete?id=<%# Eval("Id") %>">Delete</a>
                     </td>

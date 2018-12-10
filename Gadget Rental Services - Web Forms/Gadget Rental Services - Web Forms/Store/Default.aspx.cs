@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App_Code.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,13 @@ namespace Gadget_Rental_Services___Web_Forms.Store
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            string errorMessage = "";
+            var items = StoreItemInfoProvider.GetItems(out errorMessage);
+            if (String.IsNullOrEmpty(errorMessage))
+            {
+                rptStoreItems.DataSource = items;
+                rptStoreItems.DataBind();
+            }
         }
     }
 }
