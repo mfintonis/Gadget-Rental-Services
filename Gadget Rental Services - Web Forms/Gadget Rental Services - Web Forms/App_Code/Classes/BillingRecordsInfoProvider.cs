@@ -27,10 +27,9 @@ namespace App_Code.Classes
 
                     cmd.Parameters.AddWithValue("@UserId", info.UserId);
                     cmd.Parameters.AddWithValue("@TransactionId", info.TransactionId);
-                    cmd.Parameters.AddWithValue("@ProductName", info.ProductName);
-                    cmd.Parameters.AddWithValue("@ProductSku", info.ProductSku);
-                    cmd.Parameters.AddWithValue("@TotalPrice", info.TotalPrice);
                     cmd.Parameters.AddWithValue("@TransactionDate", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@StoreItemId", info.StoreItemId);
+                    cmd.Parameters.AddWithValue("@TotalPrice", info.TotalPrice);
 
                     try
                     {
@@ -46,6 +45,49 @@ namespace App_Code.Classes
                     }
                 }
             }
+        }
+
+        public static List<BillingRecordsInfo> GetBillingRecords()
+        {
+            var query = "SELECT * FROM BillingRecords";
+            List<BillingRecordsInfo> records;
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    try
+                    {
+                        conn.Open();
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            records = new List<BillingRecordsInfo>();
+                            while(dr.Read())
+                            {
+                                var record = new BillingRecordsInfo()
+                                {
+                                    Id = Convert.ToInt32(dr["Id"]),
+                                    UserId = dr["UserId"].ToString(),
+                                    TransactionId = dr["TransactionId"].ToString(),
+                                    TransactionDate = Convert.ToDateTime(dr["TransactionDate"]),
+                                    StoreItemId = Convert.ToInt32(dr["StoreItemId"]),
+                                    TotalPrice = Convert.ToDouble(dr["TotalPrice"])
+                                };
+
+                                records.Add(record);
+                            }
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        conn.Close();
+                        return null;
+                    }
+                }
+                conn.Close();
+            }
+
+            return records;
         }
     }
 }

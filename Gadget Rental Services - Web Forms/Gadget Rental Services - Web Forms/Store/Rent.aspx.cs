@@ -90,6 +90,7 @@ namespace Gadget_Rental_Services___Web_Forms.Store
                 billingRecord.ProductName = storeItem.ItemName;
                 billingRecord.ProductSku = storeItem.ItemSku;
                 billingRecord.TotalPrice = Convert.ToDouble(total);
+                billingRecord.StoreItemId = storeItem.Id;
 
                 if (BillingRecordsInfoProvider.AddBillingRecord(billingRecord))
                 {

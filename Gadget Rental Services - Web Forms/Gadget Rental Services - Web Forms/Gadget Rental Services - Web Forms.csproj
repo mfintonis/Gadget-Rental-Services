@@ -172,6 +172,7 @@
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
+    <Content Include="Admin\BillingRecords\Default.aspx" />
     <Content Include="Admin\Default.aspx" />
     <Content Include="Admin\StoreItems\Add.aspx" />
     <Content Include="Admin\StoreItems\Default.aspx" />
@@ -337,6 +338,13 @@
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\BillingRecords\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\BillingRecords\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -395,6 +403,8 @@
     </Compile>
     <Compile Include="App_Code\Classes\BillingRecordsInfo.cs" />
     <Compile Include="App_Code\Classes\BillingRecordsInfoProvider.cs" />
+    <Compile Include="App_Code\Classes\RentalInfo.cs" />
+    <Compile Include="App_Code\Classes\RentalInfoProvider.cs" />
     <Compile Include="App_Code\Classes\StoreItemInfo.cs" />
     <Compile Include="App_Code\Classes\StoreItemInfoProvider.cs" />
     <Compile Include="Admin\StoreItems\Add.aspx.cs">

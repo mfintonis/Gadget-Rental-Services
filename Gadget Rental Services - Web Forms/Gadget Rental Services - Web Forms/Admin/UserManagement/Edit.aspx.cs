@@ -65,6 +65,7 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.UserManagement
                 {
                     txtEmail.Text = user.Email;
                     chkIsAdmin.Checked = manager.IsInRole(user.Id, "Administrator");
+                    chkIsAdmin.Enabled = Context.User.Identity.GetUserName() != user.UserName;
 
                     txtPassword.Visible = false;
                     lblPassword.Visible = false;
@@ -81,13 +82,16 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.UserManagement
 
             var user = manager.FindById(userGuid.ToString());
             user.Email = txtEmail.Text;
-            if(manager.IsInRole(user.Id, "Administrator") && !chkIsAdmin.Checked)
+            if (Context.User.Identity.GetUserName() != user.UserName)
             {
-                manager.RemoveFromRole(user.Id, "Administrator");
-            }
-            else if (!manager.IsInRole(user.Id, "Administrator") && chkIsAdmin.Checked)
-            {
-                manager.AddToRole(user.Id, "Administrator");
+                if (manager.IsInRole(user.Id, "Administrator") && !chkIsAdmin.Checked)
+                {
+                    manager.RemoveFromRole(user.Id, "Administrator");
+                }
+                else if (!manager.IsInRole(user.Id, "Administrator") && chkIsAdmin.Checked)
+                {
+                    manager.AddToRole(user.Id, "Administrator");
+                }
             }
 
             var result = manager.Update(user);
