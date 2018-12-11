@@ -231,6 +231,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="Store\Default.aspx" />
+    <Content Include="Store\ThankYou.aspx" />
     <Content Include="Store\Rent.aspx" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config" />
@@ -392,6 +393,8 @@
     <Compile Include="Admin\UserManagement\Edit.aspx.designer.cs">
       <DependentUpon>Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="App_Code\Classes\BillingRecordsInfo.cs" />
+    <Compile Include="App_Code\Classes\BillingRecordsInfoProvider.cs" />
     <Compile Include="App_Code\Classes\StoreItemInfo.cs" />
     <Compile Include="App_Code\Classes\StoreItemInfoProvider.cs" />
     <Compile Include="Admin\StoreItems\Add.aspx.cs">
@@ -455,6 +458,13 @@
     </Compile>
     <Compile Include="Store\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Store\ThankYou.aspx.cs">
+      <DependentUpon>ThankYou.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Store\ThankYou.aspx.designer.cs">
+      <DependentUpon>ThankYou.aspx</DependentUpon>
     </Compile>
     <Compile Include="Store\Rent.aspx.cs">
       <DependentUpon>Rent.aspx</DependentUpon>

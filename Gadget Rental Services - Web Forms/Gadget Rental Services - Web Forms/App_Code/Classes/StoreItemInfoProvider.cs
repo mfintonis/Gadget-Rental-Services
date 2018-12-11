@@ -33,7 +33,7 @@ namespace App_Code.Classes
                     cmd.Parameters.AddWithValue("@ItemSku", info.ItemSku);
                     cmd.Parameters.AddWithValue("@ItemQuantityAvailable", info.ItemQuantityAvailable);
                     cmd.Parameters.AddWithValue("@ItemImagePath", info.ItemImagePath);
-                    cmd.Parameters.AddWithValue("@ItemPrice", info.ItemPrice);
+                    cmd.Parameters.AddWithValue("@ItemPrice", info.ItemPrice);                    
 
                     try
                     {

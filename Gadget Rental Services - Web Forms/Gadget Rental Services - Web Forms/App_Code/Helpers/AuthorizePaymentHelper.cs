@@ -120,12 +120,12 @@ namespace App_Code.Helpers
 
                 if (String.IsNullOrWhiteSpace(name))
                 {
-                    name = "3FRZg6qWP2w";
+                    name = "5Vw4N6drX2";
                 }
 
                 if (String.IsNullOrWhiteSpace(Item))
                 {
-                    Item = "9B4fvr4zy2D6P6M3";
+                    Item = "9HW7f33b4G4F4ssx";
                 }
 
                 ApiOperationBase<ANetApiRequest, ANetApiResponse>.MerchantAuthentication = new merchantAuthenticationType()

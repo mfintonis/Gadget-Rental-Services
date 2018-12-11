@@ -6,6 +6,9 @@
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
     <hr />
+    <% if(!(bool)Session["ItemExists"]) { %>
+    <h4 style="color: red;">The item with ID <%= Id %> does not exist.</h4>
+    <% } else { %>
     <div class="form-horizontal">
         <h3>Shipping Address</h3>
         <asp:Label runat="server" ID="lblGeneralError" CssClass="text-danger"/>
@@ -115,18 +118,10 @@
 
         <h3>Credit Card Information</h3>
         <div class="form-group">
-            <asp:Label runat="server" ID="Label7" AssociatedControlID="txtCCFirstName" CssClass="col-md-2 control-label">First Name</asp:Label>
+            <asp:Label runat="server" ID="Label7" AssociatedControlID="txtCCCardholderName" CssClass="col-md-2 control-label">Cardholder Name</asp:Label>
             <div class="col-md-10">
-                <asp:TextBox runat="server" ID="txtCCFirstName" CssClass="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="txtCCFirstName" CssClass="text-danger" ErrorMessage="This field is required." />                
-            </div>
-        </div>
-
-        <div class="form-group">
-            <asp:Label runat="server" ID="Label8" AssociatedControlID="txtCCLastName" CssClass="col-md-2 control-label">Last Name</asp:Label>
-            <div class="col-md-10">
-                <asp:TextBox runat="server" ID="txtCCLastName" CssClass="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="txtCCLastName" CssClass="text-danger" ErrorMessage="This field is required." />                
+                <asp:TextBox runat="server" ID="txtCCCardholderName" CssClass="form-control"></asp:TextBox>
+                <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="txtCCCardholderName" CssClass="text-danger" ErrorMessage="This field is required." />                
             </div>
         </div>
 
@@ -144,7 +139,7 @@
             <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtCCMonth" CssClass="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="txtCCMonth" CssClass="text-danger" ErrorMessage="This field is required." />    
-                <asp:RegularExpressionValidator runat="server" Display="Dynamic" ControlToValidate="txtCCMonth" ValidationExpression="^0*(?:[0-1][0-2]?|12)$" CssClass="text-danger" ErrorMessage="Please enter a valid month (01-12)" />
+                <asp:RegularExpressionValidator runat="server" Display="Dynamic" ControlToValidate="txtCCMonth" ValidationExpression="(?:([0][1-9]|[1][0-2])|12)$" CssClass="text-danger" ErrorMessage="Please enter a valid month (01-12)" />
             </div>
         </div>
 
@@ -175,5 +170,5 @@
         </div>
 
     </div>
-
+    <% } %>
 </asp:Content>
