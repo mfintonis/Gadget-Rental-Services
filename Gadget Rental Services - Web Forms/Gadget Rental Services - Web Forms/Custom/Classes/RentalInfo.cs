@@ -13,5 +13,6 @@ namespace Custom.Classes
         public DateTime RentalDueDate { get; set; }
         public Enums.StatusCode RentalStatus { get; set; }
         public string RentalStatusDisplayText { get; set; }
+        public string ActionResult { get; set; }
     }
 }

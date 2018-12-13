@@ -25,31 +25,37 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.RentalManagement
 
             var rentalRecords = RentalInfoProvider.GetRentals();
 
-            rptRentals.DataSource = rentalRecords;
-            rptRentals.DataBind();
-        }
-
-        protected void rptRentals_ItemDataBound(object sender, RepeaterItemEventArgs e)
-        {
-            var rental = e.Item.DataItem as RentalInfo;
-
-            if(rental != null)
+            foreach(var rental in rentalRecords)
             {
-                if(rental.RentalStatus == StatusCode.Rented)
+                if (rental != null)
                 {
-                    rental.RentalStatusDisplayText = "Rented";                  
-                }
+                    if(rental.RentalStatus != StatusCode.Overdue && DateTime.Now > rental.RentalDueDate)
+                    {
+                        rental.RentalStatus = StatusCode.Overdue;
+                        RentalInfoProvider.UpdateRental(rental);
+                    }
 
-                if(rental.RentalStatus == StatusCode.Returned)
-                {
-                    rental.RentalStatusDisplayText = "Returned";
-                }
+                    if (rental.RentalStatus == StatusCode.Rented)
+                    {
+                        rental.RentalStatusDisplayText = "Rented";
+                        rental.ActionResult = $"<a href=\"/admin/rentalmanagement/return?id={rental.Id}\">Return</a>";
+                    }
 
-                if(rental.RentalStatus == StatusCode.Overdue)
-                {
-                    rental.RentalStatusDisplayText = "<p style=\"
+                    if (rental.RentalStatus == StatusCode.Returned)
+                    {
+                        rental.RentalStatusDisplayText = "<p style=\"color: green; margin: 0;\">Returned</p>";
+                    }
+
+                    if (rental.RentalStatus == StatusCode.Overdue)
+                    {
+                        rental.RentalStatusDisplayText = "<p style=\"color: red; margin: 0;\">Overdue</p>";
+                        rental.ActionResult = $"<a href=\"/admin/rentalmanagement/return?id={rental.Id}\">Return</a>";
+                    }
                 }
             }
+
+            rptRentals.DataSource = rentalRecords;
+            rptRentals.DataBind();
         }
     }
 }

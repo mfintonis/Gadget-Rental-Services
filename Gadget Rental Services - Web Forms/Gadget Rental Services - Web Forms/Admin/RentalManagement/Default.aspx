@@ -5,14 +5,16 @@
     <br />
     <table style="width: 100%;">
         <tr>
+            <th></th>
             <th><strong>User Name</strong></th>
             <th><strong>Rented Store Item</strong></th>
             <th><strong>Due Date</strong></th>
             <th><strong>Rental Status</strong></th>
         </tr>
-        <asp:Repeater runat="server" ID="rptRentals" OnItemDataBound="rptRentals_ItemDataBound">
+        <asp:Repeater runat="server" ID="rptRentals">
             <ItemTemplate>
                 <tr>
+                    <td><%# Eval("ActionResult") %></td>
                     <td><%# (Eval("User") as Custom.Classes.UserInfo).Email %></td>
                     <td><%# (Eval("StoreItem") as Custom.Classes.StoreItemInfo).ItemName %></td>
                     <td><%# Eval("RentalDueDate") %></td>

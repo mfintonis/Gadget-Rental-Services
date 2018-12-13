@@ -39,7 +39,7 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.BillingRecords
                     }
                 }
 
-                rptBillingRecords.DataSource = records;
+                rptBillingRecords.DataSource = records.OrderByDescending(x => x.TransactionDate);
                 rptBillingRecords.DataBind();
             }
 

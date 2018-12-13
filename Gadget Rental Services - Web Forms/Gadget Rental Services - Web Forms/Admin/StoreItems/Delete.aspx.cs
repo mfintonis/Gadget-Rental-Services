@@ -12,6 +12,16 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Context.User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("~/account/login?returnurl=/admin/storeitems");
+            }
+
+            if (!Context.User.IsInRole("Administrator"))
+            {
+                Response.Redirect("~/Error?code=403");
+            }
+
             int id = 0;
 
             if (Int32.TryParse(Request["id"], out id))

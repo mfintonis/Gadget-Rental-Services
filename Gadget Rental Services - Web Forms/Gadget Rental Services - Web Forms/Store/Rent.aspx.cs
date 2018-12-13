@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Gadget_Rental_Services___Web_Forms.Store
 {
@@ -98,6 +99,19 @@ namespace Gadget_Rental_Services___Web_Forms.Store
                     storeItem.ItemQuantityAvailable--;
 
                     StoreItemInfoProvider.UpdateItem(storeItem, out expMsg);
+
+                    var rentalInfo = new RentalInfo
+                    {
+                        StoreItem = storeItem,
+                        User = new UserInfo()
+                        {
+                            UserID = Guid.Parse(HttpContext.Current.User.Identity.GetUserId()),
+                            Email = HttpContext.Current.User.Identity.Name
+                        },
+                        RentalStatus = Custom.Enums.StatusCode.Rented
+                    };
+
+                    RentalInfoProvider.AddRental(rentalInfo);
 
                     Response.Redirect("~/store/thankyou");
                 }

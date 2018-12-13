@@ -14,6 +14,16 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.UserManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Context.User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("~/account/login?returnurl=/admin/UserManagement");
+            }
+
+            if (!Context.User.IsInRole("Administrator"))
+            {
+                Response.Redirect("~/Error?code=403");
+            }
+
             Guid id = Guid.Empty;
 
             if (Guid.TryParse(Request["id"], out id))
