@@ -82,7 +82,68 @@ namespace Custom.Classes
 
         public static bool Return(int id)
         {
-            //TODO: implement
+            var info = GetRental(id);
+
+            if(info != null)
+            {
+                var expMsg = "";
+
+                info.RentalStatus = Enums.StatusCode.Returned;
+
+                var storeItem = StoreItemInfoProvider.GetItem(info.StoreItem.Id, out expMsg);
+                storeItem.ItemQuantityAvailable++;
+                StoreItemInfoProvider.UpdateItem(storeItem, out expMsg);
+
+                return UpdateRental(info);
+            }
+
+            return false;
+        }
+
+        public static RentalInfo GetRental(int id)
+        {
+            var queryText = $"SELECT * FROM View_Rental_User_StoreItem_Joined WHERE Id = {id}";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(queryText, conn))
+                {
+                    try
+                    {
+                        conn.Open();
+
+                        using (SqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            var expMsg = "";
+                            RentalInfo rental = new RentalInfo();
+                            while (dr.Read())
+                            {
+                                rental = new RentalInfo()
+                                {
+                                    Id = Convert.ToInt32(dr["Id"]),
+                                    StoreItem = StoreItemInfoProvider.GetItem(Convert.ToInt32(dr["StoreItemId"]), out expMsg),
+                                    User = new UserInfo()
+                                    {
+                                        UserID = Guid.Parse(dr["UserId"].ToString()),
+                                        Email = dr["Email"].ToString()
+                                    },
+                                    RentalDueDate = Convert.ToDateTime(dr["RentalDueDate"]),
+                                    RentalStatus = (Enums.StatusCode)dr["RentalStatus"]
+                                };
+                                
+                            }
+                            conn.Close();
+
+                            return rental;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        conn.Close();
+                        return null;
+                    }
+                }
+            }
         }
 
         public static List<RentalInfo> GetRentals()

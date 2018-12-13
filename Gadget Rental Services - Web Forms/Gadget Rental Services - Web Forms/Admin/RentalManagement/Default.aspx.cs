@@ -25,6 +25,8 @@ namespace Gadget_Rental_Services___Web_Forms.Admin.RentalManagement
 
             var rentalRecords = RentalInfoProvider.GetRentals();
 
+            rentalRecords = rentalRecords.OrderBy(x => x.RentalDueDate).ToList();
+
             foreach(var rental in rentalRecords)
             {
                 if (rental != null)

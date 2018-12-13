@@ -175,7 +175,7 @@
     <Content Include="Admin\BillingRecords\Default.aspx" />
     <Content Include="Admin\Default.aspx" />
     <Content Include="Admin\RentalManagement\Default.aspx" />
-    <Content Include="Admin\RentalManagement\Delete.aspx" />
+    <Content Include="Admin\RentalManagement\Return.aspx" />
     <Content Include="Admin\StoreItems\Add.aspx" />
     <Content Include="Admin\StoreItems\Default.aspx" />
     <Content Include="Admin\StoreItems\Delete.aspx" />
@@ -361,12 +361,12 @@
     <Compile Include="Admin\RentalManagement\Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Admin\RentalManagement\Delete.aspx.cs">
-      <DependentUpon>Delete.aspx</DependentUpon>
+    <Compile Include="Admin\RentalManagement\Return.aspx.cs">
+      <DependentUpon>Return.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Admin\RentalManagement\Delete.aspx.designer.cs">
-      <DependentUpon>Delete.aspx</DependentUpon>
+    <Compile Include="Admin\RentalManagement\Return.aspx.designer.cs">
+      <DependentUpon>Return.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\StoreItems\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
