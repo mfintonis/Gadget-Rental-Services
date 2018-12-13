@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using App_Code.Classes;
+using Custom.Classes;
 
 namespace Gadget_Rental_Services___Web_Forms.Admin.StoreItems
 {

@@ -1,5 +1,5 @@
-﻿using App_Code.Classes;
-using App_Code.Helpers;
+﻿using Custom.Classes;
+using Custom.Helpers;
 using AuthorizeNet.Api.Contracts.V1;
 using System;
 using System.Collections.Generic;

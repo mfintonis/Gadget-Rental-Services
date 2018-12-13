@@ -1,4 +1,4 @@
-﻿using App_Code.Classes;
+﻿using Custom.Classes;
 using Gadget_Rental_Services___Web_Forms.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;

@@ -5,7 +5,7 @@
     <br />
     <table style="width: 100%;">
         <tr>
-            <th><strong>Trnasaction ID</strong></th>
+            <th><strong>Transaction ID</strong></th>
             <th><strong>Date</strong></th>
             <th><strong>Product Name</strong></th>
             <th><strong>Product SKU</strong></th>
